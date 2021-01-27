@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "heroku-auto-login",
+    "description": "Heroku autologin where SSO is enabled via Gsuite, configure your Gsuite Email via extension options.",
+    "version": "0.0.1",
+    "content_scripts": [
+    {
+        "matches": [
+            "https://cli-auth.heroku.com/*",
+            "https://accounts.google.com/AccountChooser/*",
+            "https://sso.heroku.com/*",
+            "https://dashboard.heroku.com/*"
+        ],
+        "js": ["content.js"]
+    }],
+    "background":
+    {
+        "scripts": ["background.js"]
+    },
+    "permissions": ["tabs", "storage"],
+    "options_page": "options.html",
+    "icons":{
+      "128": "icons/icon_16.png",
+      "128": "icons/icon_32.png",
+      "128": "icons/icon_48.png"
+    }
+
+}
