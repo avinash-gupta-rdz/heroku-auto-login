@@ -10,12 +10,11 @@ if (window.location.origin === 'https://cli-auth.heroku.com') {
     }
 }
 if ((window.location.origin === 'https://accounts.google.com') && (window.location.pathname.startsWith("/AccountChooser"))) {
-    console.log('hello account chooser');
-
     choose_account();
 }
 
 if ((window.location.origin === 'https://dashboard.heroku.com') && document.querySelector("h4") && document.querySelector("h4").textContent && (document.querySelector("h4").textContent == 'Your session has expired') && document.querySelector("button")) document.querySelector("button").click();
+//document.querySelector('.hk-button--primary').textContent == 'Reauthenticate'
 
 
 function sleep(ms) {
@@ -23,15 +22,12 @@ function sleep(ms) {
 }
 
 async function choose_account() {
-    await sleep(2000);
+    await sleep(1000);
     chrome.storage.sync.get(['email'], function(result) {
+        if (result.email) {
+            // $x(`.//div[@data-email='${result.email}']`)[0].click()
+            document.querySelectorAll (`div[data-email$='${result.email}']`)[0].click();
+        } else { alert("Please configure default Email") }
 
-        for (var i = document.querySelectorAll("li > div").length - 2; i >= 0; i--) {
-
-            if (result.email == document.querySelectorAll("li > div")[i].innerText.split("\n")[1]) {
-                document.querySelectorAll("li > div")[i].click();
-                return false;
-            }
-        }
     })
 }
