@@ -18,3 +18,8 @@ document.querySelector('#save_gmail').addEventListener('click', function(e) {
         })
     }
 }, false);
+
+
+document.querySelector('.close').addEventListener('click', function(e) {
+    chrome.runtime.sendMessage({closeThis: true})
+}, false);
